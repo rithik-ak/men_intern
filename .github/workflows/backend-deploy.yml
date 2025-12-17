@@ -22,7 +22,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            cd ~/mern-aws-ecom/backend
+            cd ~/mern_intern/backend
             git pull origin master
             npm install
             echo "MONGO_URI=${{ secrets.MONGO_URI }}" > .env
