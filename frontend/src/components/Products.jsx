@@ -26,7 +26,7 @@ export default function Products({ setcart, cart }) {
     const confirm = window.confirm("Are you sure you want to delete this product?")
     if (!confirm) return
 
-    const res = await fetch(`http://localhost:2796/api/deleteProduct/${id}`, {
+    const res = await fetch(`${API}/api/deleteProduct/${id}`, {
       method: "DELETE",
     })
 
