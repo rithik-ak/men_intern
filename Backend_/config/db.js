@@ -1,6 +1,6 @@
 const mongoose=require("mongoose")
 
-db_url="mongodb+srv://rithikregneshak:<rithikregneshak>@cluster0.bw3tm25.mongodb.net/?appName=Cluster0";
+db_url="mongodb+srv://rithikregneshak:<uITwFWNSQRzpI7Pt>@cluster0.bw3tm25.mongodb.net/?appName=Cluster0";
 
 
 const connectDB=async()=>{
