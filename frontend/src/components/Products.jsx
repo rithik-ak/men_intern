@@ -1,89 +1,53 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+import { useState } from 'react'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
-/* Global base styles */
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color-scheme: light dark;
-  background-color: #242424;
-}
+export default function Login() {
+  const [email, sete] = useState("")
+  const navigate = useNavigate()
 
-/* Body */
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: var(--bg-color);
-  font-family: inherit;
-  color: inherit; /* let Tailwind classes set text color */
-}
-button {
-  border-radius: 0.5rem; 
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-  transition: all 0.25s;
-  /* do NOT set background or color globally */
-}
+  const handleLogin = () => {
+    localStorage.setItem("email", email)
+    navigate("/")
+  }
 
-/* Links */
-a {
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.3s;
-}
+  return (
+    <div className="flex justify-center items-center min-h-[70vh] px-4">
 
-/* Headings */
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  font-weight: 700;
-  text-align: center;
-}
+      {/* LOGIN CARD */}
+      <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
 
-/* Buttons */
+        {/* TITLE */}
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+          Login
+        </h2>
 
+        <form className="space-y-5">
 
-/* Inputs & Form Elements */
-input, textarea, select {
-  font-family: inherit;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid #ccc;
-  padding: 0.5em 0.75em;
-  outline: none;
-  transition: border-color 0.25s, box-shadow 0.25s;
-}
-input:focus, textarea:focus, select:focus {
-  border-color: #0ea5e9; 
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
-}
+          {/* EMAIL */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">
+              Email
+            </label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              onChange={(e) => sete(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-sky-400"
+            />
+          </div>
 
-/* Cards: background only, no forced text color */
-.card {
-  background-color: #1f1f1f;
-  border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
+          {/* SUBMIT */}
+          <button
+            onClick={handleLogin}
+            className="w-full py-2 bg-sky-500 text-white rounded-md font-semibold hover:bg-sky-600 transition"
+          >
+            Submit
+          </button>
 
-/* Dark / Light Mode backgrounds only */
-@media (prefers-color-scheme: light) {
-  :root { --bg-color: #ffffff; }
-  .card { background-color: #ffffff; }
-}
-@media (prefers-color-scheme: dark) {
-  :root { --bg-color: #242424; }
-  .card { background-color: #1f1f1f; }
+        </form>
+
+      </div>
+    </div>
+  )
 }
