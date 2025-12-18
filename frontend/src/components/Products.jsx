@@ -86,3 +86,4 @@ input:focus, textarea:focus, select:focus {
   :root { --bg-color: #242424; }
   .card { background-color: #1f1f1f; }
 }
+ 
