@@ -44,7 +44,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  text:black;
+  color:black;
   cursor: pointer;
   transition: all 0.25s;
   /* do NOT set background or color globally */
