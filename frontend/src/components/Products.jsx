@@ -30,6 +30,7 @@ a {
 
 /* Headings */
 h1 {
+  text-black;
   font-size: 3.2em;
   line-height: 1.1;
   font-weight: 700;
@@ -42,6 +43,7 @@ button {
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
+  text-black;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
