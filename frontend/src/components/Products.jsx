@@ -8,17 +8,18 @@
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  background-color: #242424;
+  background-color: black;
 }
 
 /* Body */
 body {
   margin: 0;
+  text-red;
   min-width: 320px;
   min-height: 100vh;
   background-color: var(--bg-color);
   font-family: inherit;
-  color: inherit; /* let Tailwind classes set text color */
+  color: black; /* let Tailwind classes set text color */
 }
 
 /* Links */
@@ -38,7 +39,7 @@ h1 {
 }
 
 /* Buttons */
-button {
+button  {
   border-radius: 0.5rem; 
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -70,7 +71,7 @@ input:focus, textarea:focus, select:focus {
 
 /* Cards: background only, no forced text color */
 .card {
-  background-color: #1f1f1f;
+  background-color:red;
   border-radius: 1rem;
   padding: 2rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
