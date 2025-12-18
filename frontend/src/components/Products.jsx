@@ -1,111 +1,94 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import { API } from "../utils/api"
 
-export default function Products({ setcart, cart }) {
-  const [products, setproducts] = useState([])
-
-  useEffect(() => {
-    fetch(`${API}/api/Product`)
-      .then(res => res.json())
-      .then(data => setproducts(data))
-  }, [])
-
-  const addTocart = (product) => {
-    const item = {
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image
-    }
-    setcart([...cart, item])
-  }
-
-  const deleteProduct = async (id) => {
-    const confirm = window.confirm("Are you sure you want to delete this product?")
-    if (!confirm) return
-
-    const res = await fetch(`${API}/api/deleteProduct/${id}`, {
-      method: "DELETE",
-    })
-
-    if (res.status === 200) {
-      alert("Product deleted successfully")
-      setproducts(products.filter(product => product._id !== id))
-    } else {
-      alert("Something went wrong")
-    }
-  }
-
+export default function Home() {
   return (
-    <div className="px-8 py-6">
+    <div className="bg-gradient-to-b from-gray-50 to-gray-100">
 
-      {/* PAGE TITLE */}
-      <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-        Products
-      </h2>
+      {/* HERO SECTION */}
+      <section className="flex flex-col items-center justify-center text-center min-h-[80vh] px-6">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-6 leading-tight">
+          Shop Smart. <span className="text-sky-500">Shop Better.</span>
+        </h1>
 
-      {/* PRODUCT GRID */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <p className="text-gray-600 max-w-2xl mb-8 text-lg">
+          Discover high-quality products at unbeatable prices.
+          Enjoy a fast, secure, and seamless shopping experience built
+          with modern web technologies.
+        </p>
 
-        {products.map(p => (
-          <div
-            key={p._id || p.id}
-            className="bg-white rounded-xl shadow-md hover:shadow-xl transition p-5 flex flex-col"
+        <div className="flex gap-4">
+          <Link
+            to="/products"
+            className="px-6 py-3 bg-sky-500 text-white rounded-lg font-semibold hover:bg-sky-600 transition shadow-md"
           >
+            Browse Products
+          </Link>
 
-            {/* PRODUCT IMAGE */}
-            <div className="flex justify-center mb-4">
-              <img
-                src={p.image}
-                alt={p.name}
-                className="w-64 h-64 object-cover rounded-lg hover:scale-105 transition"
-              />
-            </div>
+          <Link
+            to="/about"
+            className="px-6 py-3 border border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-100 transition"
+          >
+            Learn More
+          </Link>
+        </div>
+      </section>
 
-            {/* PRODUCT INFO */}
-            <h3 className="text-xl font-semibold text-gray-800 mb-1">
-              {p.name}
-            </h3>
+      {/* FEATURES SECTION */}
+      <section className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            <p className="text-sky-600 font-bold mb-2">
-              ₹ {p.price}
-            </p>
+        <div className="bg-white rounded-xl shadow-md p-6 text-center">
+          <div className="text-4xl mb-4">🚚</div>
+          <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            Fast Delivery
+          </h3>
+          <p className="text-gray-600">
+            Get your products delivered quickly with reliable shipping
+            services across the country.
+          </p>
+        </div>
 
-            <p className="text-gray-600 text-sm mb-4">
-              {p.description}
-            </p>
+        <div className="bg-white rounded-xl shadow-md p-6 text-center">
+          <div className="text-4xl mb-4">🔒</div>
+          <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            Secure Payments
+          </h3>
+          <p className="text-gray-600">
+            Your data and payments are protected using secure and modern
+            technologies.
+          </p>
+        </div>
 
-            {/* ACTION BUTTONS */}
-            <div className="mt-auto flex flex-wrap gap-3">
+        <div className="bg-white rounded-xl shadow-md p-6 text-center">
+          <div className="text-4xl mb-4">⭐</div>
+          <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            Quality Products
+          </h3>
+          <p className="text-gray-600">
+            We carefully select products to ensure the best quality and
+            customer satisfaction.
+          </p>
+        </div>
 
-              <button
-                onClick={() => addTocart(p)}
-                className="px-4 py-2 bg-sky-500 text-white rounded-md hover:bg-sky-600 transition"
-              >
-                Add to Cart
-              </button>
+      </section>
 
-              <button
-                onClick={() => deleteProduct(p._id)}
-                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition"
-              >
-                Remove
-              </button>
+      {/* CTA SECTION */}
+      <section className="bg-sky-500 text-white py-14 text-center px-6">
+        <h2 className="text-3xl font-bold mb-4">
+          Ready to start shopping?
+        </h2>
+        <p className="mb-6 text-lg opacity-90">
+          Join thousands of happy customers today.
+        </p>
 
-              <Link
-                to={`/product/${p._id}`}
-                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition"
-              >
-                View
-              </Link>
+        <Link
+          to="/login"
+          className="inline-block px-8 py-3 bg-white text-sky-600 font-semibold rounded-lg hover:bg-gray-100 transition shadow-md"
+        >
+          Get Started
+        </Link>
+      </section>
 
-            </div>
-          </div>
-        ))}
-
-      </div>
     </div>
   )
 }
