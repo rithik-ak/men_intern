@@ -33,7 +33,7 @@ function App() {
 
           {/* LOGO */}
           <h1 className="text-2xl font-bold text-white tracking-wide">
-            MY APPPPPPP
+            My App
           </h1>
 
           {/* NAVIGATION */}
