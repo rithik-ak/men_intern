@@ -1,66 +1,75 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from "react-router-dom"
-import { useState, useEffect } from "react"
 import { API } from "../utils/api"
 
-export default function () {
+export default function OrderSummary() {
   const { id } = useParams()
-  const [products, setproducts] = useState(null)
+  const [product, setProduct] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetch(`${API}/api/Product`)
       .then(res => res.json())
       .then(data => {
-        const k = data.find(p => p._id === id)
-        setproducts(k)
+        const found = data.find(p => p._id === id)
+        setProduct(found)
+        setLoading(false)
       })
-  })
+      .catch(() => setLoading(false))
+  }, [id])
 
-  const p = products
-
-  if (!p)
+  if (loading) {
     return (
-      <div className="text-center mt-20 text-xl text-gray-600">
+      <div className="flex justify-center items-center min-h-[60vh] text-gray-500 text-lg">
+        Loading product details...
+      </div>
+    )
+  }
+
+  if (!product) {
+    return (
+      <div className="flex justify-center items-center min-h-[60vh] text-red-500 text-lg font-medium">
         Product not found
       </div>
     )
+  }
 
   return (
-    <div className="flex justify-center px-6 py-12" key={p.id}>
+    <div className="flex justify-center px-6 py-12 bg-gray-50">
 
       {/* CONFIRMATION CARD */}
-      <div className="bg-white rounded-2xl shadow-lg p-8 max-w-lg w-full text-center">
+      <div className="bg-white rounded-2xl shadow-xl p-8 max-w-lg w-full text-center border border-gray-100">
 
         {/* TITLE */}
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">
+        <h2 className="text-2xl md:text-3xl font-extrabold text-gray-800 mb-6">
           Order Summary
         </h2>
 
         {/* IMAGE */}
         <div className="flex justify-center mb-6">
           <img
-            src={p.image}
-            alt={p.name}
-            className="w-72 h-72 object-cover rounded-xl"
+            src={product.img}
+            alt={product.name}
+            className="w-72 h-72 object-cover rounded-xl shadow-md"
           />
         </div>
 
         {/* PRODUCT INFO */}
-        <h3 className="text-xl font-semibold text-gray-800 mb-2">
-          {p.name}
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+          {product.name}
         </h3>
 
-        <p className="text-sky-600 text-lg font-bold mb-3">
-          ₹ {p.price}
+        <p className="text-sky-600 text-xl font-bold mb-4">
+          ₹ {product.price}
         </p>
 
-        <p className="text-gray-600 mb-6">
-          {p.description}
+        <p className="text-gray-600 mb-6 leading-relaxed">
+          {product.description}
         </p>
 
         {/* SUCCESS MESSAGE */}
-        <div className="bg-green-100 text-green-700 py-3 rounded-lg font-semibold">
-          🎆 Order placed successfully!
+        <div className="bg-green-50 border border-green-200 text-green-700 py-3 rounded-lg font-semibold">
+          ✅ Order placed successfully!
         </div>
 
       </div>
