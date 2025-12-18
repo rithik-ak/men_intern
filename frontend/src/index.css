@@ -18,11 +18,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Body */
 body {
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
   background-color: var(--bg-color);
@@ -47,7 +45,7 @@ h1 {
   font-weight: 700;
 }
 
-/* Buttons */
+/* Buttons: remove hardcoded background to allow Tailwind utility classes */
 button {
   border-radius: 0.5rem; /* 8px */
   border: 1px solid transparent;
@@ -55,20 +53,11 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
-  color: #fff;
   cursor: pointer;
   transition: all 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 
-/* Inputs & form elements */
+/* Inputs & Form Elements */
 input, textarea, select {
   font-family: inherit;
   font-size: 1rem;
@@ -107,10 +96,6 @@ input:focus, textarea:focus, select:focus {
     background-color: var(--bg-color);
     color: var(--text-color);
   }
-  button {
-    background-color: #f9f9f9;
-    color: #111;
-  }
   a:hover {
     color: #747bff;
   }
@@ -120,6 +105,7 @@ input:focus, textarea:focus, select:focus {
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   }
 }
+
 @media (prefers-color-scheme: dark) {
   :root {
     --text-color: rgba(255, 255, 255, 0.87);
